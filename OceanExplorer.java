@@ -1,4 +1,4 @@
-package finalProject;
+package SE350Final;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -25,18 +25,26 @@ public class OceanExplorer extends Application {
 	final int dimensions = 10;
 	final int islandCount = 10;
 	final int scalingFactor = 50;
+	
+	ArrayList<ImageView> ImageViews;
+	
 	Image shipImage;
 	ImageView shipImageView;
 	ImageView shiponeImageView;
 	ImageView shiptwoImageView;
+	
 	ImageView winIV;
 	ImageView islandIV;
+	
 	OceanMap oceanMap;
+	
 	Scene scene;
 	Ship ship;
+	
 	PirateShip pirate1;
 	PirateShip pirate2;
-	ArrayList<Point> pirates;
+	ArrayList<PirateShip> pirates;
+	
 	Button button;
 	
 	
@@ -58,10 +66,10 @@ public class OceanExplorer extends Application {
 		drawMap();
 
 		ship = new Ship(oceanMap);
-		pirate1 = new PirateShip(oceanMap);
-		pirate2 = new PirateShip(oceanMap);
-		ship.registerObserver(pirate1);
-		ship.registerObserver(pirate2);
+		
+		pirates.add(pirate1 = new PirateShip(oceanMap));
+		pirates.add(pirate2 = new PirateShip(oceanMap));
+		
 		loadPirates();
 		loadShipImage();	
 		scene = new Scene(root,500,550);
@@ -89,6 +97,12 @@ public class OceanExplorer extends Application {
 		startSailing();
 	
 	}
+	
+	private void observerStuff() {
+		for(PirateShip pirate : pirates) {
+			ship.registerObserver(pirate);
+		}
+	}
 	 
 	/*loadShipImage adds the ship image to the location of the ship
 	 * it returns nothing */
@@ -103,6 +117,7 @@ public class OceanExplorer extends Application {
 		/*loadPirates adds the pirate ship image to the location of each pirate ship
 		 * returns nothing*/
 		Image pirateImage = new Image("pirateShip.png",50,50,true,true);
+		
 		shiponeImageView = new ImageView(pirateImage);
 		shiponeImageView.setX(oceanMap.getPirates().get(0).x*scalingFactor);
 		shiponeImageView.setY(oceanMap.getPirates().get(0).y*scalingFactor);
