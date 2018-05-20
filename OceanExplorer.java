@@ -25,18 +25,26 @@ public class OceanExplorer extends Application {
 	boolean done;
 	Pane root;
 	final int scalingFactor = 50;
+	
+	ArrayList<ImageView> ImageViews;
+	
 	Image shipImage;
 	ImageView shipImageView;
 	ImageView shiponeImageView;
 	ImageView shiptwoImageView;
+	
 	ImageView winIV;
 	ImageView islandIV;
+
 	singletonMap map;
 	Scene scene;
 	Ship ship;
+	
 	PirateShip pirate1;
 	PirateShip pirate2;
-	ArrayList<Point> pirates;
+	
+	ArrayList<PirateShip> pirates = new ArrayList<PirateShip>();
+	
 	Button button;
 	
 	
@@ -52,18 +60,18 @@ public class OceanExplorer extends Application {
 	public void start(Stage mapStage) throws Exception {
 		map = singletonMap.getInstance();
 		islandMap = map.getMap();
+
 		
 		root = new AnchorPane();
 		done=false;
 		drawMap();
-		ship = new Ship();
+    
+		ship = new Ship(map);
 		
-		//pirate1 = new PirateShip(oceanMap);
-		//pirate2 = new PirateShip(oceanMap);
-		ship.registerObserver(pirate1);	
-		ship.registerObserver(pirate2);
-
-	
+		pirates.add(pirate1 = new PirateShip(map));
+		pirates.add(pirate2 = new PirateShip(map));
+		
+		observerStuff();
 		loadPirates();
 		loadShipImage();	
 		scene = new Scene(root,1000,1500);
@@ -91,24 +99,34 @@ public class OceanExplorer extends Application {
 		startSailing();
 	
 	}
+	
+	private void observerStuff() {
+		for(PirateShip pirate : pirates) {
+			ship.registerObserver(pirate);
+		}
+	}
 	 
 	/*loadShipImage adds the ship image to the location of the ship
 	 * it returns nothing */
     private void loadShipImage(){
 		Image shipImage = new Image("ship.png",50,50,true,true);
 		shipImageView = new ImageView(shipImage);
-		shipImageView.setX(map.getShipLocation().x*scalingFactor);
-		shipImageView.setY(map.getShipLocation().y*scalingFactor);
+		
+		shipImageView.setX(ship.getShipLocation().x*scalingFactor);
+		shipImageView.setY(ship.getShipLocation().y*scalingFactor);		
 		root.getChildren().add(shipImageView);
 	}
 	private void loadPirates(){
 		/*loadPirates adds the pirate ship image to the location of each pirate ship
 		 * returns nothing*/
 		Image pirateImage = new Image("pirateShip.png",50,50,true,true);
+		
 		shiponeImageView = new ImageView(pirateImage);
 		shiponeImageView.setX(map.getPirates().get(0).x*scalingFactor);
 		shiponeImageView.setY(map.getPirates().get(0).y*scalingFactor);
+
 		root.getChildren().add(shiponeImageView);
+		
 		shiptwoImageView = new ImageView(pirateImage);
 		shiptwoImageView.setX(map.getPirates().get(1).x*scalingFactor);
 		shiptwoImageView.setY(map.getPirates().get(1).y*scalingFactor);

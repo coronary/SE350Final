@@ -14,12 +14,11 @@ public class PirateShip implements Observer {
 	ArrayList<Point> updated;
 	Point og;
 
-	
-	
 	Random rand = new Random();
-	OceanMap oceanMap;
+	singletonMap oceanMap;
+	
 	/* constructor takes an OceanMap as a parameter*/
-	public PirateShip(OceanMap oceanMap){
+	public PirateShip(singletonMap oceanMap){
 		this.oceanMap = oceanMap;
 		locations = oceanMap.getPirates();
 	}

@@ -17,12 +17,17 @@ public class singletonMap {
 	Point p2;
 	
 	
-	private singletonMap(){makeGrid();
+
+	private singletonMap(){
+	makeGrid();
 	placeIslands();
 	shipLocation = placeShip();
 	pirateLocations = new ArrayList();
 	pirateLocations.add(placePirateShip());
-	pirateLocations.add(placePirateShip());}
+
+	pirateLocations.add(placePirateShip());
+	
+	}
 	
 	public static singletonMap getInstance(){
 		if(map==null){
@@ -101,10 +106,11 @@ public class singletonMap {
 		return shipLocation;
 	}
 	/*returns dimensions of the grid*/
-	public int getDimensionsX(){
+
+	public int getDimensionsx(){
 		return dimensionsx;
 	}
-	public int getDimensionsY(){
+	public int getDimensionsy(){
 		return dimensionsy;
 	}
 	/* returns array of pirate locations*/

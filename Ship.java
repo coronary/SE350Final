@@ -20,16 +20,20 @@ public class Ship implements Subject{
 	public Ship() {
 		map = singletonMap.getInstance();
 		currentLocation = map.getShipLocation();
+
 	}
 	/* returns point of ships location*/
 	public Point getShipLocation(){
+		System.out.println(currentLocation);
 		return currentLocation;
 	}
 	
 	/* if the coordinate east of location is free, then move ship east
 	 * notifies observers*/
 	public void goEast(){
+
 		if (currentLocation.x<map.getDimensionsX()-1 && map.isOcean(currentLocation.x+1, currentLocation.y)){
+
 			currentLocation.x++;
 			notifyObservers();
 		}
@@ -57,7 +61,7 @@ public class Ship implements Subject{
 		if(currentLocation.y<map.getDimensionsY()-1 && map.isOcean(currentLocation.x, currentLocation.y+1)){
     		currentLocation.y++;
     		notifyObservers();
-    	}  		
+    	}
 	}
 	/* registers observer to subject aka pirate ship to ship*/
 	public void registerObserver(Observer o) {
