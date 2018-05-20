@@ -6,7 +6,8 @@ import java.util.Random;
 
 public class singletonMap {
 	private static singletonMap map;
-	int dimensions=25;
+	int dimensionsy=14;
+	int dimensionsx=20;
 	int islandCount=20;
 	boolean[][] islands;
 	Random rand = new Random();
@@ -36,8 +37,8 @@ public class singletonMap {
 		int islandsToPlace = islandCount;
 		// while islands to places is greater than islandsToPlace place an island in a random spot that there is not already an island
 		while(islandsToPlace>0){
-			int  x = rand.nextInt(dimensions);
-			int y = rand.nextInt(dimensions);
+			int  x = rand.nextInt(dimensionsx);
+			int y = rand.nextInt(dimensionsy);
 			if(islands[x][y]==false){
 				islands[x][y]=true;
 				islandsToPlace--;
@@ -53,8 +54,8 @@ public class singletonMap {
 		int y=0;
 		//searching for spot in the grid that is false so we can place the ship
 		while(!placedShip){
-			x = rand.nextInt(dimensions);
-			y = rand.nextInt(dimensions);
+			x = rand.nextInt(dimensionsx);
+			y = rand.nextInt(dimensionsy);
 			if(islands[x][y]==false){
 				placedShip =true;
 			}	
@@ -68,8 +69,8 @@ public class singletonMap {
 		int x=0;
 		int y=0;
 		while(!placedShip){
-			x = rand.nextInt(dimensions);
-			y = rand.nextInt(dimensions);
+			x = rand.nextInt(dimensionsx);
+			y = rand.nextInt(dimensionsy);
 		
 		if(islands[x][y]==false){
 			placedShip=true;
@@ -83,9 +84,9 @@ public class singletonMap {
 	 * returns nothing*/
 	private void makeGrid(){
 		//islands is a 2d array of booleans here we will populate the grid to be false
-		islands = new boolean[dimensions][dimensions];
-		for(int i=0;i<dimensions;i++){
-			for(int j=0;j<dimensions;j++){
+		islands = new boolean[dimensionsx][dimensionsy];
+		for(int i=0;i<dimensionsx;i++){
+			for(int j=0;j<dimensionsy;j++){
 				islands[i][j]=false;
 			}
 		}
@@ -101,7 +102,7 @@ public class singletonMap {
 	}
 	/*returns dimensions of the grid*/
 	public int getDimensions(){
-		return dimensions;
+		return dimensionsx;
 	}
 	/* returns array of pirate locations*/
 	public ArrayList<Point> getPirates(){
