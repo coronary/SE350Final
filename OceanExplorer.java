@@ -1,4 +1,4 @@
-package finalProject;
+package SE350Final;
 
 import java.awt.Point;
 import java.util.ArrayList;
