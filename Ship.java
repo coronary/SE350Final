@@ -1,4 +1,4 @@
-package finalProject;
+package SE350Final;
 
 import java.awt.Point;
 import java.util.LinkedList;
@@ -10,23 +10,26 @@ import java.util.Random;
 
 public class Ship implements Subject{
 	Point currentLocation;
-	OceanMap oceanMap;
+	singletonMap oceanMap;
+	int shipX;
+	int shipY;
 	List<Observer> observers = new LinkedList<Observer>();
 
-	/* constructor take ocean mao as constructor*/
-	public Ship(OceanMap oceanMap) {
+	/* constructor take ocean map as constructor*/
+	public Ship(singletonMap oceanMap) {
 		this.oceanMap = oceanMap;
-		currentLocation = oceanMap.getShipLocation();
+		currentLocation = oceanMap.shipLocation;
 	}
 	/* returns point of ships location*/
 	public Point getShipLocation(){
+		System.out.println(currentLocation);
 		return currentLocation;
 	}
 	
 	/* if the coordinate east of location is free, then move ship east
 	 * notifies observers*/
 	public void goEast(){
-		if (currentLocation.x<oceanMap.getDimensions()-1 && oceanMap.isOcean(currentLocation.x+1, currentLocation.y)){
+		if (currentLocation.x< oceanMap.getDimensionsx()-1 && oceanMap.isOcean(currentLocation.x+1, currentLocation.y)){
 			currentLocation.x++;
 			notifyObservers();
 		}
@@ -51,10 +54,10 @@ public class Ship implements Subject{
 	/* if the coordinate south of location is free, then move ship south
 	 * notifies observers*/
 	public void goSouth(){
-		if(currentLocation.y<oceanMap.getDimensions()-1 && oceanMap.isOcean(currentLocation.x, currentLocation.y+1)){
+		if(currentLocation.y<oceanMap.getDimensionsy()-1 && oceanMap.isOcean(currentLocation.x, currentLocation.y+1)){
     		currentLocation.y++;
     		notifyObservers();
-    	}  		
+    	}
 	}
 	/* registers observer to subject aka pirate ship to ship*/
 	public void registerObserver(Observer o) {
