@@ -56,9 +56,10 @@ public class OceanExplorer extends Application {
 		root = new AnchorPane();
 		done=false;
 		drawMap();
-		ship = new Ship(oceanMap);
-		pirate1 = new PirateShip(oceanMap);
-		pirate2 = new PirateShip(oceanMap);
+		ship = new Ship();
+		
+		//pirate1 = new PirateShip(oceanMap);
+		//pirate2 = new PirateShip(oceanMap);
 		ship.registerObserver(pirate1);	
 		ship.registerObserver(pirate2);
 

@@ -101,8 +101,11 @@ public class singletonMap {
 		return shipLocation;
 	}
 	/*returns dimensions of the grid*/
-	public int getDimensions(){
+	public int getDimensionsX(){
 		return dimensionsx;
+	}
+	public int getDimensionsY(){
+		return dimensionsy;
 	}
 	/* returns array of pirate locations*/
 	public ArrayList<Point> getPirates(){

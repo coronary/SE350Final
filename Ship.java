@@ -10,13 +10,16 @@ import java.util.Random;
 
 public class Ship implements Subject{
 	Point currentLocation;
-	OceanMap oceanMap;
+	singletonMap map;
+	
+
+	
 	List<Observer> observers = new LinkedList<Observer>();
 
 	/* constructor take ocean mao as constructor*/
-	public Ship(OceanMap oceanMap) {
-		this.oceanMap = oceanMap;
-		currentLocation = oceanMap.getShipLocation();
+	public Ship() {
+		map = singletonMap.getInstance();
+		currentLocation = map.getShipLocation();
 	}
 	/* returns point of ships location*/
 	public Point getShipLocation(){
@@ -26,7 +29,7 @@ public class Ship implements Subject{
 	/* if the coordinate east of location is free, then move ship east
 	 * notifies observers*/
 	public void goEast(){
-		if (currentLocation.x<oceanMap.getDimensions()-1 && oceanMap.isOcean(currentLocation.x+1, currentLocation.y)){
+		if (currentLocation.x<map.getDimensionsX()-1 && map.isOcean(currentLocation.x+1, currentLocation.y)){
 			currentLocation.x++;
 			notifyObservers();
 		}
@@ -34,7 +37,7 @@ public class Ship implements Subject{
 	/* if the coordinate west of location is free, then move ship west
 	 * notifies observers*/
 	public void goWest(){
-		if(currentLocation.x >0 && oceanMap.isOcean(currentLocation.x-1, currentLocation.y)){
+		if(currentLocation.x >0 && map.isOcean(currentLocation.x-1, currentLocation.y)){
 	    		currentLocation.x--;
 	    		notifyObservers();
 	    	}  		
@@ -43,7 +46,7 @@ public class Ship implements Subject{
 	/*if the coordinate north of location is free, then move ship north
 	 * notifies observers*/
 	public void goNorth(){
-		if(currentLocation.y>0 && oceanMap.isOcean(currentLocation.x, currentLocation.y-1)){
+		if(currentLocation.y>0 && map.isOcean(currentLocation.x, currentLocation.y-1)){
     		currentLocation.y--;
     		notifyObservers();
     	} 
@@ -51,7 +54,7 @@ public class Ship implements Subject{
 	/* if the coordinate south of location is free, then move ship south
 	 * notifies observers*/
 	public void goSouth(){
-		if(currentLocation.y<oceanMap.getDimensions()-1 && oceanMap.isOcean(currentLocation.x, currentLocation.y+1)){
+		if(currentLocation.y<map.getDimensionsY()-1 && map.isOcean(currentLocation.x, currentLocation.y+1)){
     		currentLocation.y++;
     		notifyObservers();
     	}  		
