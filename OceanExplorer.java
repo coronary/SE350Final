@@ -74,7 +74,7 @@ public class OceanExplorer extends Application {
 		observerStuff();
 		loadPirates();
 		loadShipImage();	
-		scene = new Scene(root,1000,1500);
+		scene = new Scene(root,1000,1000);
 		mapStage.setTitle("Columbus Game");
 		mapStage.setScene(scene);
 		mapStage.show();

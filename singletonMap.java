@@ -6,9 +6,9 @@ import java.util.Random;
 
 public class singletonMap {
 	private static singletonMap map;
-	int dimensionsy=14;
-	int dimensionsx=20;
-	int islandCount=20;
+	int dimensionsy = 20;
+	int dimensionsx = 20;
+	int islandCount = 20;
 	boolean[][] islands;
 	Random rand = new Random();
 	Point shipLocation;
