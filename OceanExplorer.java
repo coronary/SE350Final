@@ -66,10 +66,10 @@ public class OceanExplorer extends Application {
 		done=false;
 		drawMap();
 
-		ship = new Ship(map);
+		ship = new Ship();
 		
-		pirates.add(pirate1 = new PirateShip(map));
-		pirates.add(pirate2 = new PirateShip(map));
+		pirates.add(pirate1 = new PirateShip());
+		pirates.add(pirate2 = new PirateShip());
 		
 		observerStuff();
 		loadPirates();

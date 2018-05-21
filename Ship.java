@@ -10,14 +10,11 @@ import java.util.Random;
 
 public class Ship implements Subject{
 	Point currentLocation;
-	singletonMap oceanMap;
-	int shipX;
-	int shipY;
+	singletonMap oceanMap = singletonMap.getInstance();
 	List<Observer> observers = new LinkedList<Observer>();
 
 	/* constructor take ocean map as constructor*/
-	public Ship(singletonMap oceanMap) {
-		this.oceanMap = oceanMap;
+	public Ship() {
 		currentLocation = oceanMap.shipLocation;
 	}
 	/* returns point of ships location*/
@@ -29,7 +26,7 @@ public class Ship implements Subject{
 	/* if the coordinate east of location is free, then move ship east
 	 * notifies observers*/
 	public void goEast(){
-		if (currentLocation.x< oceanMap.getDimensionsx()-1 && oceanMap.isOcean(currentLocation.x+1, currentLocation.y)){
+		if (currentLocation.x < oceanMap.getDimensionsx()-1 && oceanMap.isOcean(currentLocation.x+1, currentLocation.y)){
 			currentLocation.x++;
 			notifyObservers();
 		}
