@@ -1,4 +1,4 @@
-package finalProject;
+package SE350Final;
 
 
 public interface Subject {

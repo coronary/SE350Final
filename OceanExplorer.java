@@ -3,6 +3,8 @@ package SE350Final;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import columbusgame.PirateShip;
+import columbusgame.Ship;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,8 +24,6 @@ public class OceanExplorer extends Application {
 	boolean[][] islandMap;
 	boolean done;
 	Pane root;
-	final int dimensions = 10;
-	final int islandCount = 10;
 	final int scalingFactor = 50;
 	
 	ArrayList<ImageView> ImageViews;
@@ -35,9 +35,8 @@ public class OceanExplorer extends Application {
 	
 	ImageView winIV;
 	ImageView islandIV;
-	
+
 	singletonMap map;
-	
 	Scene scene;
 	Ship ship;
 	
@@ -60,13 +59,15 @@ public class OceanExplorer extends Application {
 	 * it return nothing*/
 	public void start(Stage mapStage) throws Exception {
 		map = singletonMap.getInstance();
-		islandMap = map.getMap(); // Note: We will revisit this in a future class and use an iterator instead of exposing the underlying representation!!!
+		islandMap = map.getMap();
+
 		
 		root = new AnchorPane();
 		done=false;
 		drawMap();
-
+		
 		ship = new Ship();
+
 		
 		pirates.add(pirate1 = new PirateShip());
 		pirates.add(pirate2 = new PirateShip());
@@ -113,8 +114,7 @@ public class OceanExplorer extends Application {
 		shipImageView = new ImageView(shipImage);
 		
 		shipImageView.setX(ship.getShipLocation().x*scalingFactor);
-		shipImageView.setY(ship.getShipLocation().y*scalingFactor);
-		
+		shipImageView.setY(ship.getShipLocation().y*scalingFactor);		
 		root.getChildren().add(shipImageView);
 	}
 	private void loadPirates(){
@@ -123,13 +123,14 @@ public class OceanExplorer extends Application {
 		Image pirateImage = new Image("pirateShip.png",50,50,true,true);
 		
 		shiponeImageView = new ImageView(pirateImage);
-		shiponeImageView.setX(pirates.get(0).getPirates().get(0).x*scalingFactor);
-		shiponeImageView.setY(pirates.get(0).getPirates().get(0).y*scalingFactor);
+		shiponeImageView.setX(map.getPirates().get(0).x*scalingFactor);
+		shiponeImageView.setY(map.getPirates().get(0).y*scalingFactor);
+
 		root.getChildren().add(shiponeImageView);
 		
 		shiptwoImageView = new ImageView(pirateImage);
-		shiptwoImageView.setX(pirates.get(0).getPirates().get(1).x*scalingFactor);
-		shiptwoImageView.setY(pirates.get(0).getPirates().get(1).y*scalingFactor);
+		shiptwoImageView.setX(map.getPirates().get(1).x*scalingFactor);
+		shiptwoImageView.setY(map.getPirates().get(1).y*scalingFactor);
 		root.getChildren().add(shiptwoImageView);
 		
 	}
