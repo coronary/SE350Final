@@ -3,8 +3,7 @@ package SE350Final;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import columbusgame.PirateShip;
-import columbusgame.Ship;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
