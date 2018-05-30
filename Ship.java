@@ -20,7 +20,6 @@ public class Ship implements Subject{
 	public Ship() {
 		map = singletonMap.getInstance();
 		currentLocation = map.getShipLocation();
-
 	}
 	/* returns point of ships location*/
 	public Point getShipLocation(){
@@ -31,9 +30,7 @@ public class Ship implements Subject{
 	/* if the coordinate east of location is free, then move ship east
 	 * notifies observers*/
 	public void goEast(){
-
 		if (currentLocation.x<map.getDimensionsX()-1 && map.isOcean(currentLocation.x+1, currentLocation.y)){
-
 			currentLocation.x++;
 			notifyObservers();
 		}

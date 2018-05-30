@@ -3,8 +3,7 @@ package SE350Final;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import columbusgame.PirateShip;
-import columbusgame.Ship;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -65,16 +64,17 @@ public class OceanExplorer extends Application {
 		root = new AnchorPane();
 		done=false;
 		drawMap();
-    
-		ship = new Ship(map);
 		
-		pirates.add(pirate1 = new PirateShip(map));
-		pirates.add(pirate2 = new PirateShip(map));
+		ship = new Ship();
+
+		
+		pirates.add(pirate1 = new PirateShip());
+		pirates.add(pirate2 = new PirateShip());
 		
 		observerStuff();
 		loadPirates();
 		loadShipImage();	
-		scene = new Scene(root,1000,1500);
+		scene = new Scene(root,1000,1000);
 		mapStage.setTitle("Columbus Game");
 		mapStage.setScene(scene);
 		mapStage.show();
