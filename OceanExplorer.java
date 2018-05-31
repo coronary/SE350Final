@@ -32,7 +32,6 @@ public class OceanExplorer extends Application {
 	ImageView shiponeImageView;
 	ImageView shiptwoImageView;
 	
-	ImageView winIV;
 	ImageView islandIV;
 
 	singletonMap map;
@@ -144,9 +143,25 @@ public class OceanExplorer extends Application {
 		ImageView chestView = chest.getImage();
 		
 		chestView.setX(chest.getX()*scalingFactor);
-		chestView.setX(chest.getY()*scalingFactor);
+		chestView.setY(chest.getY()*scalingFactor);
 		
 		root.getChildren().add(chestView);
+	}
+	
+	private void youWin() {
+		Image win = new Image("win.png",1000,0,true,true);
+		ImageView winIV= new ImageView(win);
+		winIV.setX(0);
+		winIV.setY(500);
+		root.getChildren().add(winIV);
+	}
+	
+	private void youLose() {
+		Image lose = new Image("lose.png",1000,0,true,true);
+		ImageView loseIV = new ImageView(lose);
+		loseIV.setX(0);
+		loseIV.setY(300);
+		root.getChildren().add(loseIV);
 	}
 	
 	private void startSailing(){
@@ -181,7 +196,7 @@ public class OceanExplorer extends Application {
 				if(!done){
 				shipImageView.setX(ship.getShipLocation().x*scalingFactor);
 				shipImageView.setY(ship.getShipLocation().y*scalingFactor);
-				//ship.notifyObservers();
+				ship.notifyObservers();
 				
 				
 				
@@ -191,17 +206,14 @@ public class OceanExplorer extends Application {
 		    	shiptwoImageView.setX(pirate2.getPirates().get(1).x*scalingFactor);
 		    	shiptwoImageView.setY(pirate2.getPirates().get(1).y*scalingFactor);
 		    	
-				if(pirate1.getPirates().get(0).equals(ship.getShipLocation()) || pirate2.getPirates().get(1).equals(ship.getShipLocation())){
-			    	Image win = new Image("win.png",50,50,true,true);
-					winIV= new ImageView(win);
-					winIV.setX(ship.getShipLocation().x*scalingFactor);
-					winIV.setY(ship.getShipLocation().y*scalingFactor);
-					root.getChildren().add(winIV);
+				if(pirate1.getPirates().get(0).equals(ship.getShipLocation()) 
+						|| pirate2.getPirates().get(1).equals(ship.getShipLocation())){
+					youLose();
 					done=true;
 					}
 				
 				if(chest.checkChest(ship.getShipLocation())) {
-					System.out.println("Done");
+					youWin();
 					done = true;
 				}
 					

@@ -39,7 +39,7 @@ public class TreasureChest {
 	}
 	
 	public boolean checkChest(Point ship) {
-		System.out.println("chest" + coords);
+		System.out.println("chest " + coords);
 		return ship.equals(coords);
 	}
 	
