@@ -42,6 +42,8 @@ public class OceanExplorer extends Application {
 	PirateShip pirate1;
 	PirateShip pirate2;
 	
+	TreasureChest chest;
+	
 	ArrayList<PirateShip> pirates = new ArrayList<PirateShip>();
 	
 	Button button;
@@ -73,6 +75,7 @@ public class OceanExplorer extends Application {
 		
 		observerStuff();
 		loadPirates();
+		loadTreasure();
 		loadShipImage();	
 		scene = new Scene(root,1000,1000);
 		mapStage.setTitle("Columbus Game");
@@ -88,6 +91,7 @@ public class OceanExplorer extends Application {
 		    	public void handle(ActionEvent ke) {
 			 		try {
 			 			singletonMap.destroy();
+			 			chest.destroy();
 						start(mapStage);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -134,6 +138,17 @@ public class OceanExplorer extends Application {
 		root.getChildren().add(shiptwoImageView);
 		
 	}
+	
+	private void loadTreasure() {
+		chest = TreasureChest.getInstance();
+		ImageView chestView = chest.getImage();
+		
+		chestView.setX(chest.getX()*scalingFactor);
+		chestView.setX(chest.getY()*scalingFactor);
+		
+		root.getChildren().add(chestView);
+	}
+	
 	private void startSailing(){
 		/*startSailing contains the event handler thats tells the ship were to move when each key is pressed
 		 * updates location of ship images
@@ -145,28 +160,28 @@ public class OceanExplorer extends Application {
 			@Override
 			public void handle(KeyEvent ke) {
 				if(!done){
-				
-				switch(ke.getCode()){
-				case RIGHT:
-					ship.goEast();
-					break;
-				case LEFT:
-					ship.goWest();
-					break;
-				case UP:
-					ship.goNorth();
-					break;
-				case DOWN:
-					ship.goSouth();
-					break;
-				default:
-					break;
+					
+					switch(ke.getCode()){
+					case RIGHT:
+						ship.goEast();
+						break;
+					case LEFT:
+						ship.goWest();
+						break;
+					case UP:
+						ship.goNorth();
+						break;
+					case DOWN:
+						ship.goSouth();
+						break;
+					default:
+						break;
 				}
-				}
+			}
 				if(!done){
 				shipImageView.setX(ship.getShipLocation().x*scalingFactor);
 				shipImageView.setY(ship.getShipLocation().y*scalingFactor);
-				ship.notifyObservers();
+				//ship.notifyObservers();
 				
 				
 				
@@ -184,6 +199,11 @@ public class OceanExplorer extends Application {
 					root.getChildren().add(winIV);
 					done=true;
 					}
+				
+				if(chest.checkChest(ship.getShipLocation())) {
+					System.out.println("Done");
+					done = true;
+				}
 					
 				}
 		    	

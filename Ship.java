@@ -12,8 +12,6 @@ public class Ship implements Subject{
 	Point currentLocation;
 	singletonMap map;
 	
-
-	
 	List<Observer> observers = new LinkedList<Observer>();
 
 	/* constructor take ocean mao as constructor*/
@@ -21,6 +19,7 @@ public class Ship implements Subject{
 		map = singletonMap.getInstance();
 		currentLocation = map.getShipLocation();
 	}
+	
 	/* returns point of ships location*/
 	public Point getShipLocation(){
 		System.out.println(currentLocation);
@@ -32,7 +31,7 @@ public class Ship implements Subject{
 	public void goEast(){
 		if (currentLocation.x<map.getDimensionsX()-1 && map.isOcean(currentLocation.x+1, currentLocation.y)){
 			currentLocation.x++;
-			notifyObservers();
+			//notifyObservers();
 		}
 	}
 	/* if the coordinate west of location is free, then move ship west
@@ -40,7 +39,7 @@ public class Ship implements Subject{
 	public void goWest(){
 		if(currentLocation.x >0 && map.isOcean(currentLocation.x-1, currentLocation.y)){
 	    		currentLocation.x--;
-	    		notifyObservers();
+	    		//notifyObservers();
 	    	}  		
 		
 	}
@@ -49,7 +48,7 @@ public class Ship implements Subject{
 	public void goNorth(){
 		if(currentLocation.y>0 && map.isOcean(currentLocation.x, currentLocation.y-1)){
     		currentLocation.y--;
-    		notifyObservers();
+    		//notifyObservers();
     	} 
 	}
 	/* if the coordinate south of location is free, then move ship south
@@ -57,9 +56,10 @@ public class Ship implements Subject{
 	public void goSouth(){
 		if(currentLocation.y<map.getDimensionsY()-1 && map.isOcean(currentLocation.x, currentLocation.y+1)){
     		currentLocation.y++;
-    		notifyObservers();
+    		//notifyObservers();
     	}
 	}
+	
 	/* registers observer to subject aka pirate ship to ship*/
 	public void registerObserver(Observer o) {
 		observers.add(o);

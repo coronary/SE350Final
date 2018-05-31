@@ -12,6 +12,7 @@ public class singletonMap {
 	boolean[][] islands;
 	Random rand = new Random();
 	Point shipLocation;
+	Point treasureLocation;
 	ArrayList<Point> pirateLocations;
 	Point p1;
 	Point p2;
@@ -22,10 +23,11 @@ public class singletonMap {
 	makeGrid();
 	placeIslands();
 	shipLocation = placeShip();
+	treasureLocation = placeTreasure();
 	pirateLocations = new ArrayList<Point>();
 	pirateLocations.add(placePirateShip());
-
 	pirateLocations.add(placePirateShip());
+	islands[treasureLocation.x][treasureLocation.y] = false;
 	
 	}
 	
@@ -67,6 +69,7 @@ public class singletonMap {
 		}
 		return new Point(x,y);
 	}
+	
 	/*places pirate ship on ocean 
 	 * returns point of the pirate ship location */
 	private Point placePirateShip(){
@@ -83,7 +86,25 @@ public class singletonMap {
 	}
 		return new Point(x,y);
 	}
-
+	
+	private Point placeTreasure() {
+		int x = 0;
+		int y = 0;
+		boolean placedTreasure = false;
+		
+		while(!placedTreasure){
+			x = rand.nextInt(dimensionsx);
+			y = rand.nextInt(dimensionsy);
+		
+		if(islands[x][y]==false){
+			placedTreasure=true;
+			}
+		}
+		//sets location to true so no ships will be placed on the treasure location.
+		//Set to null later in constructor
+		islands[x][y] = true;
+		return new Point(x,y);
+	}
 
 	/*make grid builds a 2D array and populates everything to be false
 	 * returns nothing*/
@@ -104,6 +125,9 @@ public class singletonMap {
 	/*returns coordinates of the ship*/
 	public Point getShipLocation(){
 		return shipLocation;
+	}
+	public Point getTreasureLocatoin() {
+		return treasureLocation;
 	}
 	/*returns dimensions of the grid*/
 
