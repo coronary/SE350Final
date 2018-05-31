@@ -9,25 +9,28 @@ public class singletonMap {
 	int dimensionsy = 20;
 	int dimensionsx = 20;
 	int islandCount = 20;
+	int areaCount = 5;
 	boolean[][] islands;
 	Random rand = new Random();
 	Point shipLocation;
 	Point treasureLocation;
 	ArrayList<Point> pirateLocations;
+	ArrayList<Area> areas;
 	Point p1;
 	Point p2;
 	
 	
 
 	private singletonMap(){
-	makeGrid();
-	placeIslands();
-	shipLocation = placeShip();
-	treasureLocation = placeTreasure();
-	pirateLocations = new ArrayList<Point>();
-	pirateLocations.add(placePirateShip());
-	pirateLocations.add(placePirateShip());
-	islands[treasureLocation.x][treasureLocation.y] = false;
+		makeGrid();
+		placeIslands();
+		placeAreas();
+		shipLocation = placeShip();
+		treasureLocation = placeTreasure();
+		pirateLocations = new ArrayList<Point>();
+		pirateLocations.add(placePirateShip());
+		pirateLocations.add(placePirateShip());
+		islands[treasureLocation.x][treasureLocation.y] = false;
 	
 	}
 	
@@ -53,6 +56,34 @@ public class singletonMap {
 		}
 		
 	}
+	
+	private void placeAreas() {
+		int areasToPlace = areaCount;
+		areas = new ArrayList<Area>();
+		Point origin = null;
+		
+		while(areasToPlace > 0) {
+			int  x = rand.nextInt(dimensionsx);
+			int y = rand.nextInt(dimensionsy);
+			try {
+				if(!islands[x][y] && !islands[x+1][y] && !islands[x+2][y]) {
+					System.out.println("Succeed");
+					origin = new Point(x,y);
+					areas.add(new Area(origin));
+					areasToPlace--;
+				}
+			}catch (ArrayIndexOutOfBoundsException e) {
+				System.out.println("fail");
+				System.out.println(x + " " + y);
+				//e.printStackTrace();
+			}
+		}
+	}
+	
+	public ArrayList<Area> getAreas(){
+		return areas;
+	}
+	
 	/*places the ship on the grid where there is no island or other ship
 	 * returns the point of the ships location*/
 	private Point placeShip() {
@@ -126,7 +157,7 @@ public class singletonMap {
 	public Point getShipLocation(){
 		return shipLocation;
 	}
-	public Point getTreasureLocatoin() {
+	public Point getTreasureLocation() {
 		return treasureLocation;
 	}
 	/*returns dimensions of the grid*/

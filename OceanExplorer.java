@@ -44,6 +44,7 @@ public class OceanExplorer extends Application {
 	TreasureChest chest;
 	
 	ArrayList<PirateShip> pirates = new ArrayList<PirateShip>();
+	ArrayList<Area> areas;
 	
 	Button button;
 	
@@ -75,6 +76,7 @@ public class OceanExplorer extends Application {
 		observerStuff();
 		loadPirates();
 		loadTreasure();
+		loadAreas();
 		loadShipImage();	
 		scene = new Scene(root,1000,1000);
 		mapStage.setTitle("Columbus Game");
@@ -148,6 +150,20 @@ public class OceanExplorer extends Application {
 		root.getChildren().add(chestView);
 	}
 	
+	private void loadAreas() {
+		
+		areas = map.getAreas();
+		System.out.println(areas);
+		for (Area area : areas) {
+			for (AreaOrMonster monster : area.getChildren()) {
+				ImageView monsterView = monster.getImageView();
+				monsterView.setX(monster.getX()*scalingFactor);
+				monsterView.setY(monster.getY()*scalingFactor);
+				root.getChildren().add(monsterView);
+			}
+		}
+	}
+	
 	private void youWin() {
 		Image win = new Image("win.png",1000,0,true,true);
 		ImageView winIV= new ImageView(win);
@@ -162,6 +178,26 @@ public class OceanExplorer extends Application {
 		loseIV.setX(0);
 		loseIV.setY(300);
 		root.getChildren().add(loseIV);
+	}
+	
+	private void movePirates() {
+		shiponeImageView.setX(pirate1.getPirates().get(0).x*scalingFactor);
+    	shiponeImageView.setY(pirate1.getPirates().get(0).y*scalingFactor);
+    	
+    	shiptwoImageView.setX(pirate2.getPirates().get(1).x*scalingFactor);
+    	shiptwoImageView.setY(pirate2.getPirates().get(1).y*scalingFactor);
+	}
+	
+	private void movePlayer() {
+		shipImageView.setX(ship.getShipLocation().x*scalingFactor);
+		shipImageView.setY(ship.getShipLocation().y*scalingFactor);
+		ship.notifyObservers();
+	}
+	
+	private void moveMonsters() {
+		for (AreaOrMonster obj : areas) {
+			obj.move();
+		}
 	}
 	
 	private void startSailing(){
@@ -193,31 +229,23 @@ public class OceanExplorer extends Application {
 						break;
 				}
 			}
-				if(!done){
-				shipImageView.setX(ship.getShipLocation().x*scalingFactor);
-				shipImageView.setY(ship.getShipLocation().y*scalingFactor);
-				ship.notifyObservers();
-				
-				
-				
-	    		shiponeImageView.setX(pirate1.getPirates().get(0).x*scalingFactor);
-		    	shiponeImageView.setY(pirate1.getPirates().get(0).y*scalingFactor);
+				if (!done){
+					movePlayer();
+					movePirates();
+					moveMonsters();
 		    	
-		    	shiptwoImageView.setX(pirate2.getPirates().get(1).x*scalingFactor);
-		    	shiptwoImageView.setY(pirate2.getPirates().get(1).y*scalingFactor);
-		    	
-				if(pirate1.getPirates().get(0).equals(ship.getShipLocation()) 
-						|| pirate2.getPirates().get(1).equals(ship.getShipLocation())){
-					youLose();
-					done=true;
+					if (pirate1.getPirates().get(0).equals(ship.getShipLocation()) 
+							|| pirate2.getPirates().get(1).equals(ship.getShipLocation())) {
+						youLose();
+						done=true;
 					}
-				
-				if(chest.checkChest(ship.getShipLocation())) {
-					youWin();
-					done = true;
-				}
 					
-				}
+					if (chest.checkChest(ship.getShipLocation())) {
+						youWin();
+						done = true;
+					}
+					
+			}
 		    	
 	  
 				
