@@ -78,15 +78,16 @@ public class OceanExplorer extends Application {
 		mapStage.setTitle("Columbus Game");
 		mapStage.setScene(scene);
 		mapStage.show();
+		
 		button = new Button("Reset");
-		button.setLayoutX(0);
-		button.setLayoutY(500);
+		button.setLayoutY(970);
 	
 		
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 		    	public void handle(ActionEvent ke) {
 			 		try {
+			 			singletonMap.destroy();
 						start(mapStage);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -176,7 +177,7 @@ public class OceanExplorer extends Application {
 		    	shiptwoImageView.setY(pirate2.getPirates().get(1).y*scalingFactor);
 		    	
 				if(pirate1.getPirates().get(0).equals(ship.getShipLocation()) || pirate2.getPirates().get(1).equals(ship.getShipLocation())){
-			    	Image win = new Image("win.gif",50,50,true,true);
+			    	Image win = new Image("win.png",50,50,true,true);
 					winIV= new ImageView(win);
 					winIV.setX(ship.getShipLocation().x*scalingFactor);
 					winIV.setY(ship.getShipLocation().y*scalingFactor);

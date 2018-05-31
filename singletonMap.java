@@ -22,7 +22,7 @@ public class singletonMap {
 	makeGrid();
 	placeIslands();
 	shipLocation = placeShip();
-	pirateLocations = new ArrayList();
+	pirateLocations = new ArrayList<Point>();
 	pirateLocations.add(placePirateShip());
 
 	pirateLocations.add(placePirateShip());
@@ -127,6 +127,10 @@ public class singletonMap {
 		else{
 			return false;
 		}
+	}
+	
+	public static void destroy() {
+		map = null;
 	}
 
 
