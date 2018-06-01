@@ -70,4 +70,10 @@ public class Monster implements AreaOrMonster {
 		return monsView;
 	}
 
+	@Override
+	public boolean checkShip(Point ship) {
+		// TODO Auto-generated method stub
+		return ship.equals(new Point(x,y));
+	}
+
 }

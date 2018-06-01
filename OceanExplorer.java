@@ -246,6 +246,14 @@ public class OceanExplorer extends Application {
 						done = true;
 					}
 					
+					for (Area area : areas) {
+						for (AreaOrMonster monster : area.getChildren()) {
+							if (monster.checkShip(ship.getShipLocation())){
+								youLose();
+								done = true;
+							}
+						}
+					}
 			}
 		    	
 	  

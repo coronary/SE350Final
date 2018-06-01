@@ -81,4 +81,10 @@ public class Area implements AreaOrMonster {
 	public ArrayList<AreaOrMonster> getChildren(){
 		return children;
 	}
+
+	@Override
+	public boolean checkShip(Point ship) {
+		// TODO Auto-generated method stub
+		return ship.equals(origin);
+	}
 }
