@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 
 public class Monster implements AreaOrMonster {
 	int x;
+	int ogX;
 	int y;
 	int offset;
 	boolean leftRight;
@@ -17,27 +18,28 @@ public class Monster implements AreaOrMonster {
 	public Monster(Point location) {
 		monsPic = new Image("monster.jpg",50,50,true,true);
 		monsView = new ImageView(monsPic);
+		ogX = location.x;
 		x = location.x;
 		y = location.y;
 		offset = 0;
-		leftRight = true;
 	}
 	
 	@Override
 	public void move() {
+		x = ogX;
 		// TODO Auto-generated method stub
+		//System.out.println(offset);
 		if (offset == 0) leftRight = true;
 		if (offset == 3) leftRight = false;
 		
 		if (leftRight) {
-			x++;
 			offset++;
 		}
 		if (!leftRight) {
-			x--;
 			offset--;
 		}
-
+		//System.out.println(x);
+		x = x + offset;
 	}
 
 	@Override

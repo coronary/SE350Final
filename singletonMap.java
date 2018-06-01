@@ -67,13 +67,11 @@ public class singletonMap {
 			int y = rand.nextInt(dimensionsy);
 			try {
 				if(!islands[x][y] && !islands[x+1][y] && !islands[x+2][y]) {
-					System.out.println("Succeed");
 					origin = new Point(x,y);
 					areas.add(new Area(origin));
 					areasToPlace--;
 				}
 			}catch (ArrayIndexOutOfBoundsException e) {
-				System.out.println("fail");
 				System.out.println(x + " " + y);
 				//e.printStackTrace();
 			}

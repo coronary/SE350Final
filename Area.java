@@ -53,7 +53,10 @@ public class Area implements AreaOrMonster {
 	@Override
 	public int getX() {
 		// TODO Auto-generated method stub
-		return origin.x;
+		for (AreaOrMonster child : children) {
+			return child.getX();
+		}
+		return 0;
 	}
 
 	@Override
@@ -63,12 +66,12 @@ public class Area implements AreaOrMonster {
 	}
 	
 	public ImageView getImageView() {
-		for (AreaOrMonster child : children) {
-			if (child instanceof Monster) {
-				childImages.add(child.getImageView());
-			}
-		}
-		return null;
+//		for (AreaOrMonster child : children) {
+//			if (child instanceof Monster) {
+//				childImages.add(child.getImageView());
+//			}
+//		}
+		return children.get(0).getImageView();
 	}
 	
 	public ArrayList<ImageView> getImageList(){

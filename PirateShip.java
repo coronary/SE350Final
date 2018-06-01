@@ -64,8 +64,8 @@ public class PirateShip implements Observer {
 	public ArrayList<Point> getPirates(){
 		return locations;
 	}
-	
-	}
+
+}
 	
 	
 	

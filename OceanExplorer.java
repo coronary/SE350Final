@@ -25,7 +25,7 @@ public class OceanExplorer extends Application {
 	Pane root;
 	final int scalingFactor = 50;
 	
-	ArrayList<ImageView> ImageViews;
+	ArrayList<ImageView> monsterImageViews;
 	
 	Image shipImage;
 	ImageView shipImageView;
@@ -151,15 +151,13 @@ public class OceanExplorer extends Application {
 	}
 	
 	private void loadAreas() {
-		
 		areas = map.getAreas();
-		System.out.println(areas);
+//		System.out.println(areas);
 		for (Area area : areas) {
 			for (AreaOrMonster monster : area.getChildren()) {
-				ImageView monsterView = monster.getImageView();
-				monsterView.setX(monster.getX()*scalingFactor);
-				monsterView.setY(monster.getY()*scalingFactor);
-				root.getChildren().add(monsterView);
+				monster.getImageView().setX(monster.getX()*scalingFactor);
+				monster.getImageView().setY(monster.getY()*scalingFactor);
+				root.getChildren().add(monster.getImageView());
 			}
 		}
 	}
@@ -195,8 +193,11 @@ public class OceanExplorer extends Application {
 	}
 	
 	private void moveMonsters() {
+		System.out.println(areas);
 		for (AreaOrMonster obj : areas) {
 			obj.move();
+			obj.getImageView().setX(obj.getX()*scalingFactor);
+			System.out.println(obj.getX());
 		}
 	}
 	
