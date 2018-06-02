@@ -9,14 +9,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 
 public class OceanExplorer extends Application {
 
@@ -33,7 +37,7 @@ public class OceanExplorer extends Application {
 	ImageView shiptwoImageView;
 	
 	ImageView winIV;
-	ImageView islandIV;
+	ImageView islandIV; 
 
 	singletonMap map;
 	Scene scene;
@@ -45,6 +49,10 @@ public class OceanExplorer extends Application {
 	ArrayList<PirateShip> pirates = new ArrayList<PirateShip>();
 	
 	Button button;
+	Button b1;
+	Button b2;
+	Button b3;
+	static String diff;
 	
 	
 	public static void main(String[] args){
@@ -74,15 +82,15 @@ public class OceanExplorer extends Application {
 		observerStuff();
 		loadPirates();
 		loadShipImage();	
-		scene = new Scene(root,1000,1000);
+		
 		mapStage.setTitle("Columbus Game");
-		mapStage.setScene(scene);
+		scene = new Scene(root,1000,1000);
+	    mapStage.setScene(scene);
 		mapStage.show();
 		button = new Button("Reset");
 		button.setLayoutX(0);
 		button.setLayoutY(500);
-	
-		
+
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 		    	public void handle(ActionEvent ke) {
@@ -94,6 +102,31 @@ public class OceanExplorer extends Application {
 			 	}
 			});
 		root.getChildren().add(button);
+		b1 = new Button("Easy");
+		b1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+		    	public void handle(ActionEvent ke) {
+			 		diff ="Easy";}
+			});
+		root.getChildren().add(b1);
+		b2 = new Button("Normal");
+		b2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+		    	public void handle(ActionEvent ke) {
+			 		diff ="Normal";}
+			});
+		b2.setLayoutX(50);
+		root.getChildren().add(b2);
+		b3 = new Button("Hard");
+		b3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+		    	public void handle(ActionEvent ke) {
+			 		diff ="Hard";}
+			});
+		b3.setLayoutX(115);
+		root.getChildren().add(b3);
+		
+		
 		
 		
 		startSailing();
@@ -115,6 +148,8 @@ public class OceanExplorer extends Application {
 		shipImageView.setX(ship.getShipLocation().x*scalingFactor);
 		shipImageView.setY(ship.getShipLocation().y*scalingFactor);		
 		root.getChildren().add(shipImageView);
+	
+		
 	}
 	private void loadPirates(){
 		/*loadPirates adds the pirate ship image to the location of each pirate ship
@@ -213,6 +248,9 @@ public class OceanExplorer extends Application {
 				root.getChildren().add(rect);}
 			}
 		}
+	}
+	public static String getDifficulty(){
+		return diff; 
 	}
 	
 

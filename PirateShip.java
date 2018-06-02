@@ -9,19 +9,21 @@ import java.util.Random;
 public class PirateShip implements Observer {
 	Point pirateLocationOne;
 	Point pirateLocationTwo;
-	Point shipLocation;
-	ArrayList<Point> locations;
+	static Point shipLocation;
+	static ArrayList<Point> locations;
 	ArrayList<Point> updated;
 	Point og;
-
 	Random rand = new Random();
 	singletonMap oceanMap = singletonMap.getInstance();
-	
+	MoveStrategy moveStrategy;
+	String level;
 	/* constructor takes an OceanMap as a parameter*/
 	public PirateShip(){
 		locations = oceanMap.getPirates();
 	}
-	
+	public void setStrategy(MoveStrategy strategy){
+		moveStrategy = strategy;
+	}
 	/* updates pirateship when ship moves*/
 	public void update(Ship ship) {
 		if(ship instanceof Ship){
@@ -31,32 +33,20 @@ public class PirateShip implements Observer {
 	}
 	/* moves pirate ship closer to ships location */
 	public void movePirateShip(){
-	
-		for(Point ship:locations){
-			og =ship;
-			 if(rand.nextInt(2)==1){ 
-				 try{
-				 if (ship.x - shipLocation.x < 0 && oceanMap.isOcean(ship.x+1, ship.y))
-					 ship.x++;
-				 else if(oceanMap.isOcean(ship.x-1,ship.y))
-					 ship.x--;
-				 
-				 if (ship.y - shipLocation.y < 0 && oceanMap.isOcean(ship.x,ship.y+1))
-
-					 ship.y++;
-				 else if(oceanMap.isOcean(ship.x, ship.y-1))
-	
-					 ship.y--;
-
-				 }
-				 catch(ArrayIndexOutOfBoundsException e){
-				ship=og;
-				 }
-			 
-			 }
-			 
-			
+		//have if/if-else statements to check if user selected easy/normal/hard and then set the strategy accordingly
+		level = OceanExplorer.getDifficulty();
+		if (level=="Easy"){
+			setStrategy(new EasyMove());	
 		}
+		else if(level=="Hard"){
+			setStrategy(new HardMove());
+		}
+		else{
+			setStrategy(new NormalMove());
+		}
+		moveStrategy.movePirateShip();
+		
+		
 
 	}
 	 
