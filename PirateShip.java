@@ -7,8 +7,6 @@ import java.util.Random;
 
 
 public class PirateShip implements Observer {
-	Point pirateLocationOne;
-	Point pirateLocationTwo;
 	Point shipLocation;
 	ArrayList<Point> locations;
 	ArrayList<Point> updated;
