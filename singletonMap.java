@@ -95,58 +95,6 @@ public class singletonMap {
 		return areas;
 	}
 	
-	/*places the ship on the grid where there is no island or other ship
-	 * returns the point of the ships location*/
-//	private Point placeShip() {
-//		boolean placedShip = false;
-//		int x=0;
-//		int y=0;
-//		//searching for spot in the grid that is false so we can place the ship
-//		while(!placedShip){
-//			x = rand.nextInt(dimensionsx);
-//			y = rand.nextInt(dimensionsy);
-//			if(islands[x][y]==false){
-//				placedShip =true;
-//			}	
-//		}
-//		return new Point(x,y);
-//	}
-	
-	/*places pirate ship on ocean 
-	 * returns point of the pirate ship location */
-//	private Point placePirateShip(){
-//		boolean placedShip = false;
-//		int x=0;
-//		int y=0;
-//		while(!placedShip){
-//			x = rand.nextInt(dimensionsx);
-//			y = rand.nextInt(dimensionsy);
-//		
-//		if(islands[x][y]==false){
-//			placedShip=true;
-//		}
-//	}
-//		return new Point(x,y);
-//	}
-	
-//	private Point placeTreasure() {
-//		int x = 0;
-//		int y = 0;
-//		boolean placedTreasure = false;
-//		
-//		while(!placedTreasure){
-//			x = rand.nextInt(dimensionsx);
-//			y = rand.nextInt(dimensionsy);
-//		
-//		if(islands[x][y]==false){
-//			placedTreasure=true;
-//			}
-//		}
-//		//sets location to true so no ships will be placed on the treasure location.
-//		//Set to null later in constructor
-//		islands[x][y] = true;
-//		return new Point(x,y);
-//	}
 
 	/*make grid builds a 2D array and populates everything to be false
 	 * returns nothing*/
