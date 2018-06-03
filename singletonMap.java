@@ -66,7 +66,7 @@ public class singletonMap {
 			int  x = rand.nextInt(dimensionsx);
 			int y = rand.nextInt(dimensionsy);
 			try {
-				if(!islands[x][y] && !islands[x+1][y] && !islands[x+2][y]) {
+				if(!islands[x][y] && !islands[x+1][y] && !islands[x+2][y] && !islands[x+3][y]) {
 					origin = new Point(x,y);
 					areas.add(new Area(origin));
 					areasToPlace--;

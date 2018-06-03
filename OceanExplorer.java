@@ -78,9 +78,10 @@ public class OceanExplorer extends Application {
 		
 		ship = new Ship();
 
+		PirateFactory factory = new PirateFactory();
 		
-		pirates.add(pirate1 = new PirateShip());
-		pirates.add(pirate2 = new PirateShip());
+		pirates.add(pirate1 = factory.createPirate("normal"));
+		pirates.add(pirate2 = factory.createPirate("abnormal"));
 		
 		observerStuff();
 		loadPirates();
@@ -162,15 +163,14 @@ public class OceanExplorer extends Application {
 	private void loadPirates(){
 		/*loadPirates adds the pirate ship image to the location of each pirate ship
 		 * returns nothing*/
-		Image pirateImage = new Image("pirateShip.png",50,50,true,true);
+
 		
-		shiponeImageView = new ImageView(pirateImage);
+		shiponeImageView = pirate1.getPirateImageView();
 		shiponeImageView.setX(map.getPirates().get(0).x*scalingFactor);
 		shiponeImageView.setY(map.getPirates().get(0).y*scalingFactor);
-
 		root.getChildren().add(shiponeImageView);
 		
-		shiptwoImageView = new ImageView(pirateImage);
+		shiptwoImageView = pirate2.getPirateImageView();
 		shiptwoImageView.setX(map.getPirates().get(1).x*scalingFactor);
 		shiptwoImageView.setY(map.getPirates().get(1).y*scalingFactor);
 		root.getChildren().add(shiptwoImageView);

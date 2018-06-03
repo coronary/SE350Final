@@ -9,8 +9,8 @@ public class NormalMove implements MoveStrategy {
 	@Override
 	public void movePirateShip() {
 	
-		for(Point ship:locations){
-			og =ship;
+		for(Point ship : locations){
+			og = ship;
 			 if(rand.nextInt(2)==1){ 
 				 try{
 				 if (ship.x - shipLocation.x < 0 && oceanMap.isOcean(ship.x+1, ship.y))
