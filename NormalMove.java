@@ -6,35 +6,35 @@ import java.util.ArrayList;
 public class NormalMove implements MoveStrategy {
 
 	Point og;
+	Point change;
 	@Override
-	public void movePirateShip() {
-	
-		for(Point ship:locations){
-			og =ship;
+	public void movePirateShip(PirateShip pirate, Point shipLocation) {
+			
+			System.out.println(shipLocation + " Normal Move");
+			
+			
+			og = pirate.getCurrentLocation();
+			change = og;
 			 if(rand.nextInt(2)==1){ 
 				 try{
-				 if (ship.x - shipLocation.x < 0 && oceanMap.isOcean(ship.x+1, ship.y))
-					 ship.x++;
-				 else if(oceanMap.isOcean(ship.x-1,ship.y))
-					 ship.x--;
+				 if (change.x - shipLocation.x < 0 && oceanMap.isOcean(change.x+1, change.y))
+					 change.x++;
+				 else if(oceanMap.isOcean(change.x-1,change.y))
+					 change.x--;
 				 
-				 if (ship.y - shipLocation.y < 0 && oceanMap.isOcean(ship.x,ship.y+1))
+				 if (change.y - shipLocation.y < 0 && oceanMap.isOcean(change.x,change.y+1))
 
-					 ship.y++;
-				 else if(oceanMap.isOcean(ship.x, ship.y-1))
-	
-					 ship.y--;
+					 change.y++;
+				 else if(oceanMap.isOcean(change.x, change.y-1))
+					 change.y--;
 
 				 }
 				 catch(ArrayIndexOutOfBoundsException e){
-				ship=og;
+					 change = og;
 				 }
 			 
 			 }
-			 
-			
-		}
-
+		pirate.setLocation(change);
 	}
 	@Override
 	public String getStrategy() {

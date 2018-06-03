@@ -11,33 +11,47 @@ import javafx.scene.image.ImageView;
 
 public class PirateShip implements Observer {
 
-	Point pirateLocationOne;
-	Point pirateLocationTwo;
+	Point currentLocation;
 	static Point shipLocation;
 	static ArrayList<Point> locations;
 	ArrayList<Point> updated;
 	Point og;
 	Random rand = new Random();
 	singletonMap oceanMap = singletonMap.getInstance();
+	
 	MoveStrategy moveStrategy;
 	String level;
-	Image shipPic;
-	static ImageView shipView;
+	
+	Image pirateImage;
+	ImageView pirateIV;
+	
+	Random rand1 = new Random();
+	
+	int check;
+	
 	/* constructor takes an OceanMap as a parameter*/
-	public PirateShip(){
-		locations = oceanMap.getPirates();
-		shipPic = new Image("pirateShip.png",50,50,true,true);
-		shipView = new ImageView(shipPic);
+	public PirateShip(String image, Point location){
+		check = rand1.nextInt(1000000);
+		//System.out.println(image);
+		currentLocation = location;
+		
+		pirateImage = new Image(image,50,50,true,true);
+		pirateIV = new ImageView(pirateImage);
 	}
+	
+	public ImageView getPirateImageView() {
+		return pirateIV;
+>>>>>>> 58c964de43a2ba96d8c8a09ed50af9e084aa2278
+	}
+	
 	public void setStrategy(MoveStrategy strategy){
 		moveStrategy = strategy;
 	}
 	/* updates pirateship when ship moves*/
 	public void update(Ship ship) {
-		if(ship instanceof Ship){
-			  shipLocation = ((Ship)ship).getShipLocation();
-			  movePirateShip();
-		  }
+		  shipLocation = ship.getCurrentLocation();
+		 // System.out.println(shipLocation + " PirateShip update method");
+		  movePirateShip();
 	}
 	/*returns the ship imageview*/
 	public static ImageView getImage(){
@@ -56,15 +70,19 @@ public class PirateShip implements Observer {
 		else{
 			setStrategy(new NormalMove());
 		}
-		moveStrategy.movePirateShip();
+		moveStrategy.movePirateShip(this, shipLocation);
 		
 		
 
 	}
 	 
 	/*returns list of pirate locations*/
-	public ArrayList<Point> getPirates(){
-		return locations;
+	public Point getCurrentLocation(){
+		return currentLocation;
+	}
+	
+	public void setLocation(Point location) {
+		currentLocation = location;
 	}
 
 }

@@ -57,6 +57,7 @@ public class OceanExplorer extends Application {
 	Button b3;
 	static String diff;
 	
+	PirateFactory factory;
 	
 	public static void main(String[] args){
 		launch(args);
@@ -71,16 +72,16 @@ public class OceanExplorer extends Application {
 		map = singletonMap.getInstance();
 		islandMap = map.getMap();
 
-		
 		root = new AnchorPane();
 		done=false;
 		drawMap();
 		
 		ship = new Ship();
 
+		factory = new PirateFactory();
 		
-		pirates.add(pirate1 = new PirateShip());
-		pirates.add(pirate2 = new PirateShip());
+		pirates.add(pirate1 = factory.createPirate("normal", map.giveCoordinates()));
+		pirates.add(pirate2 = factory.createPirate("abnormal", map.giveCoordinates()));
 		
 		observerStuff();
 		loadPirates();
@@ -103,12 +104,21 @@ public class OceanExplorer extends Application {
 			 		try {
 			 			singletonMap.destroy();
 			 			chest.destroy();
+			 			ship.clearObservers();
+			 			nuclear();
 						start(mapStage);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 			 	}
 			});
+		
+		addButtons();
+		startSailing();
+	
+	}
+	
+	private void addButtons() {
 		root.getChildren().add(button);
 		b1 = new Button("Easy");
 		b1.setOnAction(new EventHandler<ActionEvent>() {
@@ -133,12 +143,12 @@ public class OceanExplorer extends Application {
 			});
 		b3.setLayoutX(115);
 		root.getChildren().add(b3);
-		
-		
-		
-		
-		startSailing();
+	}
 	
+	private void nuclear() {
+		pirates.clear();
+		pirate1 = null;
+		pirate2 = null;
 	}
 	
 	private void observerStuff() {
@@ -152,9 +162,9 @@ public class OceanExplorer extends Application {
     private void loadShipImage(){
 		shipImageView = Ship.getImage();
 		
-		shipImageView.setX(ship.getShipLocation().getX()*scalingFactor);
-		shipImageView.setY(ship.getShipLocation().getY()*scalingFactor);
-		
+		shipImageView.setX(ship.getCurrentLocation().x*scalingFactor);
+		shipImageView.setY(ship.getCurrentLocation().y*scalingFactor);		
+
 		root.getChildren().add(shipImageView);
 	
 		
@@ -162,17 +172,16 @@ public class OceanExplorer extends Application {
 	private void loadPirates(){
 		/*loadPirates adds the pirate ship image to the location of each pirate ship
 		 * returns nothing*/
-		Image pirateImage = new Image("pirateShip.png",50,50,true,true);
-		
-		shiponeImageView = new ImageView(pirateImage);
-		shiponeImageView.setX(map.getPirates().get(0).x*scalingFactor);
-		shiponeImageView.setY(map.getPirates().get(0).y*scalingFactor);
 
+		
+		shiponeImageView = pirate1.getPirateImageView();
+		shiponeImageView.setX(pirate1.getCurrentLocation().x*scalingFactor);
+		shiponeImageView.setY(pirate1.getCurrentLocation().y*scalingFactor);
 		root.getChildren().add(shiponeImageView);
 		
-		shiptwoImageView = new ImageView(pirateImage);
-		shiptwoImageView.setX(map.getPirates().get(1).x*scalingFactor);
-		shiptwoImageView.setY(map.getPirates().get(1).y*scalingFactor);
+		shiptwoImageView = pirate2.getPirateImageView();
+		shiptwoImageView.setX(pirate2.getCurrentLocation().x*scalingFactor);
+		shiptwoImageView.setY(pirate2.getCurrentLocation().y*scalingFactor);
 		root.getChildren().add(shiptwoImageView);
 		
 	}
@@ -199,6 +208,11 @@ public class OceanExplorer extends Application {
 		}
 	}
 	
+	public void nuclearOption() {
+		pirate1 = null;
+		pirate2 = null;
+	}
+	
 	private void youWin() {
 		Image win = new Image("win.png",1000,0,true,true);
 		ImageView winIV= new ImageView(win);
@@ -216,25 +230,25 @@ public class OceanExplorer extends Application {
 	}
 	
 	private void movePirates() {
-		shiponeImageView.setX(pirate1.getPirates().get(0).x*scalingFactor);
-    	shiponeImageView.setY(pirate1.getPirates().get(0).y*scalingFactor);
+		shiponeImageView.setX(pirate1.getCurrentLocation().x*scalingFactor);
+    	shiponeImageView.setY(pirate1.getCurrentLocation().y*scalingFactor);
     	
-    	shiptwoImageView.setX(pirate2.getPirates().get(1).x*scalingFactor);
-    	shiptwoImageView.setY(pirate2.getPirates().get(1).y*scalingFactor);
+    	shiptwoImageView.setX(pirate2.getCurrentLocation().x*scalingFactor);
+    	shiptwoImageView.setY(pirate2.getCurrentLocation().y*scalingFactor);
 	}
 	
 	private void movePlayer() {
-		shipImageView.setX(ship.getShipLocation().x*scalingFactor);
-		shipImageView.setY(ship.getShipLocation().y*scalingFactor);
+		shipImageView.setX(ship.getCurrentLocation().x*scalingFactor);
+		shipImageView.setY(ship.getCurrentLocation().y*scalingFactor);
 		ship.notifyObservers();
 	}
 	
 	private void moveMonsters() {
-		System.out.println(areas);
+		//System.out.println(areas);
 		for (AreaOrMonster obj : areas) {
 			obj.move();
 			obj.getImageView().setX(obj.getX()*scalingFactor);
-			System.out.println(obj.getX());
+			//System.out.println(obj.getX());
 		}
 	}
 	
@@ -269,23 +283,24 @@ public class OceanExplorer extends Application {
 			}
 				if (!done){
 					movePlayer();
+					map.setShipLocation(ship.getCurrentLocation());
 					movePirates();
 					moveMonsters();
 		    	
-					if (pirate1.getPirates().get(0).equals(ship.getShipLocation()) 
-							|| pirate2.getPirates().get(1).equals(ship.getShipLocation())) {
+					if (pirate1.getCurrentLocation().equals(ship.getCurrentLocation()) 
+							|| pirate2.getCurrentLocation().equals(ship.getCurrentLocation())) {
 						youLose();
 						done=true;
 					}
 					
-					if (chest.checkChest(ship.getShipLocation())) {
+					if (chest.checkChest(ship.getCurrentLocation())) {
 						youWin();
 						done = true;
 					}
 					
 					for (Area area : areas) {
 						for (AreaOrMonster monster : area.getChildren()) {
-							if (monster.checkShip(ship.getShipLocation())){
+							if (monster.checkShip(ship.getCurrentLocation())){
 								youLose();
 								done = true;
 							}
