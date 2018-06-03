@@ -8,6 +8,7 @@ public class NormalMove implements MoveStrategy {
 	Point og;
 	Point change;
 	@Override
+	//moves pirate ships normally, one in two chance that they will move
 	public void movePirateShip(PirateShip pirate, Point shipLocation) {
 			
 			System.out.println(shipLocation + " Normal Move");
@@ -37,6 +38,7 @@ public class NormalMove implements MoveStrategy {
 		pirate.setLocation(change);
 	}
 	@Override
+	//returns strategy
 	public String getStrategy() {
 		return "Normal Move";
 	}

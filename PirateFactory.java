@@ -3,7 +3,7 @@ package SE350Final;
 import java.awt.Point;
 
 public class PirateFactory {
-	
+	//create pirate based off pirate type and location
 	public PirateShip createPirate(String type, Point location) {
 		PirateShip pirate = null;
 		if (type.equals("normal")) {

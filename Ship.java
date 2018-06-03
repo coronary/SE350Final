@@ -81,7 +81,7 @@ public class Ship implements Subject{
 		}
 		
 	}
-	
+	//removes all observers of ship
 	public void clearObservers() {
 		for (Observer observer : observers) {
 			removeObserver(observer);
