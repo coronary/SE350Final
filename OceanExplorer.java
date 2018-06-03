@@ -104,6 +104,7 @@ public class OceanExplorer extends Application {
 			 		try {
 			 			singletonMap.destroy();
 			 			chest.destroy();
+			 			ship.clearObservers();
 						start(mapStage);
 					} catch (Exception e) {
 						e.printStackTrace();

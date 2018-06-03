@@ -72,6 +72,12 @@ public class Ship implements Subject{
 		}
 		
 	}
+	
+	public void clearObservers() {
+		for (Observer observer : observers) {
+			removeObserver(observer);
+		}
+	}
 
 	@Override
 	/*notifies observers of subject movement aka notifies pirate ship that ship moved*/

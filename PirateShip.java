@@ -25,9 +25,13 @@ public class PirateShip implements Observer {
 	Image pirateImage;
 	ImageView pirateIV;
 	
+	Random rand1 = new Random();
+	
+	int check;
+	
 	/* constructor takes an OceanMap as a parameter*/
 	public PirateShip(String image, Point location){
-		
+		check = rand1.nextInt(1000000);
 		//System.out.println(image);
 		currentLocation = location;
 		
@@ -60,7 +64,7 @@ public class PirateShip implements Observer {
 		else{
 			setStrategy(new NormalMove());
 		}
-		moveStrategy.movePirateShip(this);
+		moveStrategy.movePirateShip(this, check);
 		
 		
 

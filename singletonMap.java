@@ -180,7 +180,8 @@ public class singletonMap {
 		return dimensionsy;
 	}
 	public void setShipLocation(Point ship) {
-		System.out.println("lol");
+		System.out.println("lol" + " singeltonMap setShipLocation");
+		System.out.println("");
 		shipLocation = ship;
 	}
 	/* returns boolean if an ocean is ocean or is not ocean*/
