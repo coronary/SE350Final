@@ -117,7 +117,7 @@ public class OceanExplorer extends Application {
 		startSailing();
 	
 	}
-	
+	//adds buttons to javafx
 	private void addButtons() {
 		root.getChildren().add(button);
 		b1 = new Button("Easy");
@@ -144,13 +144,13 @@ public class OceanExplorer extends Application {
 		b3.setLayoutX(115);
 		root.getChildren().add(b3);
 	}
-	
+	//clears pirate stats
 	private void nuclear() {
 		pirates.clear();
 		pirate1 = null;
 		pirate2 = null;
 	}
-	
+	//registers all pirate as observers
 	private void observerStuff() {
 		for(PirateShip pirate : pirates) {
 			ship.registerObserver(pirate);
@@ -195,7 +195,7 @@ public class OceanExplorer extends Application {
 		
 		root.getChildren().add(chestView);
 	}
-	
+	//adds the imageviews of the children in the area
 	private void loadAreas() {
 		areas = map.getAreas();
 //		System.out.println(areas);
@@ -207,12 +207,12 @@ public class OceanExplorer extends Application {
 			}
 		}
 	}
-	
+	//pirate one and two = null
 	public void nuclearOption() {
 		pirate1 = null;
 		pirate2 = null;
 	}
-	
+	//win condition and imageview
 	private void youWin() {
 		Image win = new Image("win.png",1000,0,true,true);
 		ImageView winIV= new ImageView(win);
@@ -220,7 +220,7 @@ public class OceanExplorer extends Application {
 		winIV.setY(500);
 		root.getChildren().add(winIV);
 	}
-	
+	//lose condition and imageview
 	private void youLose() {
 		Image lose = new Image("lose.png",1000,0,true,true);
 		ImageView loseIV = new ImageView(lose);
@@ -228,7 +228,7 @@ public class OceanExplorer extends Application {
 		loseIV.setY(300);
 		root.getChildren().add(loseIV);
 	}
-	
+	//updates locations of pirate ImageViews
 	private void movePirates() {
 		shiponeImageView.setX(pirate1.getCurrentLocation().x*scalingFactor);
     	shiponeImageView.setY(pirate1.getCurrentLocation().y*scalingFactor);
@@ -236,19 +236,18 @@ public class OceanExplorer extends Application {
     	shiptwoImageView.setX(pirate2.getCurrentLocation().x*scalingFactor);
     	shiptwoImageView.setY(pirate2.getCurrentLocation().y*scalingFactor);
 	}
-	
+	//updates location of ship ImageView
 	private void movePlayer() {
 		shipImageView.setX(ship.getCurrentLocation().x*scalingFactor);
 		shipImageView.setY(ship.getCurrentLocation().y*scalingFactor);
 		ship.notifyObservers();
 	}
-	
+	//updates location of monster ImageView
 	private void moveMonsters() {
-		//System.out.println(areas);
 		for (AreaOrMonster obj : areas) {
 			obj.move();
 			obj.getImageView().setX(obj.getX()*scalingFactor);
-			//System.out.println(obj.getX());
+			
 		}
 	}
 	
@@ -336,6 +335,7 @@ public class OceanExplorer extends Application {
 			}
 		}
 	}
+	//returns the difficulty of the game (Easy, Normal, Hard)
 	public static String getDifficulty(){
 		return diff; 
 	}

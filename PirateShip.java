@@ -38,11 +38,11 @@ public class PirateShip implements Observer {
 		pirateImage = new Image(image,50,50,true,true);
 		pirateIV = new ImageView(pirateImage);
 	}
-	
+	//returns pirate imageview
 	public ImageView getPirateImageView() {
 		return pirateIV;
 	}
-	
+	//sets the move strategy of pirates
 	public void setStrategy(MoveStrategy strategy){
 		moveStrategy = strategy;
 	}
@@ -75,7 +75,7 @@ public class PirateShip implements Observer {
 	public Point getCurrentLocation(){
 		return currentLocation;
 	}
-	
+	//set location of pirate
 	public void setLocation(Point location) {
 		currentLocation = location;
 	}

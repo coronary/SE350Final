@@ -20,7 +20,7 @@ public class singletonMap {
 	Point p2;
 	
 	
-
+	
 	private singletonMap(){
 		makeGrid();
 		placeIslands();
@@ -34,7 +34,7 @@ public class singletonMap {
 		islands[treasureLocation.x][treasureLocation.y] = false;
 	
 	}
-	
+	//returns instance of map
 	public static singletonMap getInstance(){
 		if(map==null){
 			map = new singletonMap();
@@ -68,7 +68,7 @@ public class singletonMap {
 		}
 		return null;
 	}
-	
+	//places areas in the singletonmap 
 	private void placeAreas() {
 		int areasToPlace = areaCount;
 		areas = new ArrayList<Area>();
@@ -90,7 +90,7 @@ public class singletonMap {
 			}
 		}
 	}
-	
+	//returns an array list of all areas in the singleton map 
 	public ArrayList<Area> getAreas(){
 		return areas;
 	}
@@ -127,9 +127,8 @@ public class singletonMap {
 	public int getDimensionsY(){
 		return dimensionsy;
 	}
+	//updates the ship location 
 	public void setShipLocation(Point ship) {
-//		System.out.println("lol" + " singeltonMap setShipLocation");
-//		System.out.println("");
 		shipLocation = ship;
 	}
 	/* returns boolean if an ocean is ocean or is not ocean*/
@@ -141,7 +140,7 @@ public class singletonMap {
 			return false;
 		}
 	}
-	
+	//clears the map 
 	public static void destroy() {
 		map = null;
 	}

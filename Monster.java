@@ -14,7 +14,7 @@ public class Monster implements AreaOrMonster {
 	Image monsPic;
 	ImageView monsView;
 	
-	
+	//monster takes a point as a parameter
 	public Monster(Point location) {
 		monsPic = new Image("monster.jpg",50,50,true,true);
 		monsView = new ImageView(monsPic);
@@ -25,6 +25,7 @@ public class Monster implements AreaOrMonster {
 	}
 	
 	@Override
+	//moves the monster
 	public void move() {
 		x = ogX;
 		// TODO Auto-generated method stub
@@ -53,24 +54,25 @@ public class Monster implements AreaOrMonster {
 		// TODO Auto-generated method stub
 
 	}
-
+	//returns x coordinate of monster
 	@Override
 	public int getX() {
 		// TODO Auto-generated method stub
 		return x;
 	}
-
+	//returns y coordinate of monster
 	@Override
 	public int getY() {
 		// TODO Auto-generated method stub
 		return y;
 	}
-	
+	//returns monster ImageView
 	public ImageView getImageView() {
 		return monsView;
 	}
 
 	@Override
+	//compares points of ships
 	public boolean checkShip(Point ship) {
 		// TODO Auto-generated method stub
 		return ship.equals(new Point(x,y));

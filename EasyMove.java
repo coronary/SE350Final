@@ -7,6 +7,7 @@ public class EasyMove implements MoveStrategy{
 	Point og;
 	Point change;
 	@Override
+	//moves pirate ships slowly one in five chance that pirate ships will move
 	public void movePirateShip(PirateShip pirate, Point shipLocation) {
 			System.out.println(shipLocation + " Easy Move");
 			og = pirate.getCurrentLocation();
@@ -35,6 +36,7 @@ public class EasyMove implements MoveStrategy{
 			 pirate.setLocation(change);
 	}
 	@Override
+	//returns type of strategy
 	public String getStrategy() {
 		return "Easy Strategy";
 	}
