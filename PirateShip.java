@@ -4,6 +4,9 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 
 public class PirateShip implements Observer {
@@ -18,9 +21,13 @@ public class PirateShip implements Observer {
 	singletonMap oceanMap = singletonMap.getInstance();
 	MoveStrategy moveStrategy;
 	String level;
+	Image shipPic;
+	static ImageView shipView;
 	/* constructor takes an OceanMap as a parameter*/
 	public PirateShip(){
 		locations = oceanMap.getPirates();
+		shipPic = new Image("pirateShip.png",50,50,true,true);
+		shipView = new ImageView(shipPic);
 	}
 	public void setStrategy(MoveStrategy strategy){
 		moveStrategy = strategy;
@@ -31,6 +38,10 @@ public class PirateShip implements Observer {
 			  shipLocation = ((Ship)ship).getShipLocation();
 			  movePirateShip();
 		  }
+	}
+	/*returns the ship imageview*/
+	public static ImageView getImage(){
+		return shipView;
 	}
 	/* moves pirate ship closer to ships location */
 	public void movePirateShip(){

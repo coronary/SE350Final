@@ -16,7 +16,7 @@ public class Monster implements AreaOrMonster {
 	
 	
 	public Monster(Point location) {
-		monsPic = new Image("monster.jpg",50,50,true,true);
+		monsPic = new Image("seamonster.png",50,50,true,true);
 		monsView = new ImageView(monsPic);
 		ogX = location.x;
 		x = location.x;
