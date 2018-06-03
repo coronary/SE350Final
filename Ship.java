@@ -21,8 +21,8 @@ public class Ship implements Subject{
 	}
 	
 	/* returns point of ships location*/
-	public Point getShipLocation(){
-		System.out.println(currentLocation);
+	public Point getCurrentLocation(){
+		//System.out.println(currentLocation);
 		return currentLocation;
 	}
 	

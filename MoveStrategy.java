@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public interface MoveStrategy {
-	public void movePirateShip();
+	public void movePirateShip(PirateShip ship);
 	public String getStrategy();
+	
 	singletonMap oceanMap = singletonMap.getInstance();
 	Random rand = new Random();
-	Point shipLocation=PirateShip.shipLocation;
-	ArrayList<Point> locations = PirateShip.locations;
+	
+	Point shipLocation = oceanMap.shipLocation;
+	
+	ArrayList<Point> locations = oceanMap.pirateLocations;
 	
 	
 

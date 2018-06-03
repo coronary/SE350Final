@@ -5,34 +5,31 @@ import java.awt.Point;
 public class HardMove implements MoveStrategy {
 
 	Point og;
+	Point change;
 	@Override
-	public void movePirateShip() {
+	public void movePirateShip(PirateShip pirate) {
 	
-		for(Point ship:locations){
-			og =ship;
+			og = pirate.getCurrentLocation();
+			change = og;
 	
 			 try{
-			 if (ship.x - shipLocation.x < 0 && oceanMap.isOcean(ship.x+1, ship.y))
-				 ship.x+=2;
-			 else if(oceanMap.isOcean(ship.x-1,ship.y))
-				 ship.x-=2;
+			 if (change.x - shipLocation.x < 0 && oceanMap.isOcean(change.x+1, change.y))
+				 change.x+=2;
+			 else if(oceanMap.isOcean(change.x-1,change.y))
+				 change.x-=2;
 			 
-			 if (ship.y - shipLocation.y < 0 && oceanMap.isOcean(ship.x,ship.y+1))
+			 if (change.y - shipLocation.y < 0 && oceanMap.isOcean(change.x,change.y+1))
 
-				 ship.y+=2;
-			 else if(oceanMap.isOcean(ship.x, ship.y-1))
+				 change.y+=2;
+			 else if(oceanMap.isOcean(change.x, change.y-1))
 
-				 ship.y-=2;
+				 change.y-=2;
 
 			 }
 			 catch(ArrayIndexOutOfBoundsException e){
-			ship=og;
+				 change = og;
 			 }
-			 
-			
-			 
-			
-		}
+			 pirate.setLocation(change);
 
 	}
 

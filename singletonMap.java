@@ -25,11 +25,12 @@ public class singletonMap {
 		makeGrid();
 		placeIslands();
 		placeAreas();
-		shipLocation = placeShip();
-		treasureLocation = placeTreasure();
+		shipLocation = giveCoordinates();
+		treasureLocation = giveCoordinates();
 		pirateLocations = new ArrayList<Point>();
-		pirateLocations.add(placePirateShip());
-		pirateLocations.add(placePirateShip());
+		
+		pirateLocations.add(giveCoordinates());
+		pirateLocations.add(giveCoordinates());
 		islands[treasureLocation.x][treasureLocation.y] = false;
 	
 	}
@@ -44,17 +45,28 @@ public class singletonMap {
 	/* places the number of islands that were passed in the parameter on grid
 	 * returns nothing*/
 	private void placeIslands() {
-		int islandsToPlace = islandCount;
+		for (int x = 0; x < islandCount; x++) {
+			Point islandLocation = giveCoordinates();
+			islands[islandLocation.x][islandLocation.y] = true;
+		}
 		// while islands to places is greater than islandsToPlace place an island in a random spot that there is not already an island
-		while(islandsToPlace>0){
-			int  x = rand.nextInt(dimensionsx);
-			int y = rand.nextInt(dimensionsy);
-			if(islands[x][y]==false){
-				islands[x][y]=true;
-				islandsToPlace--;
+		
+	}
+	
+	public Point giveCoordinates() {
+		//Returns a valid pair of coordinates that aren't on an island or a pirate ship
+		boolean placed = false;
+		int x = rand.nextInt(dimensionsx);
+		int y = rand.nextInt(dimensionsy);
+		while (!placed) {
+			x = rand.nextInt(dimensionsx);
+			y = rand.nextInt(dimensionsy);
+			if (islands[x][y] == false) {
+				placed = true;
+				return new Point(x,y);
 			}
 		}
-		
+		return null;
 	}
 	
 	private void placeAreas() {
@@ -63,8 +75,9 @@ public class singletonMap {
 		Point origin = null;
 		
 		while(areasToPlace > 0) {
-			int  x = rand.nextInt(dimensionsx);
-			int y = rand.nextInt(dimensionsy);
+			Point coord = giveCoordinates();
+			int x = coord.x;
+			int y = coord.y;
 			try {
 				if(!islands[x][y] && !islands[x+1][y] && !islands[x+2][y] && !islands[x+3][y]) {
 					origin = new Point(x,y);
@@ -72,7 +85,7 @@ public class singletonMap {
 					areasToPlace--;
 				}
 			}catch (ArrayIndexOutOfBoundsException e) {
-				System.out.println(x + " " + y);
+				//System.out.println(x + " " + y);
 				//e.printStackTrace();
 			}
 		}
@@ -84,56 +97,56 @@ public class singletonMap {
 	
 	/*places the ship on the grid where there is no island or other ship
 	 * returns the point of the ships location*/
-	private Point placeShip() {
-		boolean placedShip = false;
-		int x=0;
-		int y=0;
-		//searching for spot in the grid that is false so we can place the ship
-		while(!placedShip){
-			x = rand.nextInt(dimensionsx);
-			y = rand.nextInt(dimensionsy);
-			if(islands[x][y]==false){
-				placedShip =true;
-			}	
-		}
-		return new Point(x,y);
-	}
+//	private Point placeShip() {
+//		boolean placedShip = false;
+//		int x=0;
+//		int y=0;
+//		//searching for spot in the grid that is false so we can place the ship
+//		while(!placedShip){
+//			x = rand.nextInt(dimensionsx);
+//			y = rand.nextInt(dimensionsy);
+//			if(islands[x][y]==false){
+//				placedShip =true;
+//			}	
+//		}
+//		return new Point(x,y);
+//	}
 	
 	/*places pirate ship on ocean 
 	 * returns point of the pirate ship location */
-	private Point placePirateShip(){
-		boolean placedShip = false;
-		int x=0;
-		int y=0;
-		while(!placedShip){
-			x = rand.nextInt(dimensionsx);
-			y = rand.nextInt(dimensionsy);
-		
-		if(islands[x][y]==false){
-			placedShip=true;
-		}
-	}
-		return new Point(x,y);
-	}
+//	private Point placePirateShip(){
+//		boolean placedShip = false;
+//		int x=0;
+//		int y=0;
+//		while(!placedShip){
+//			x = rand.nextInt(dimensionsx);
+//			y = rand.nextInt(dimensionsy);
+//		
+//		if(islands[x][y]==false){
+//			placedShip=true;
+//		}
+//	}
+//		return new Point(x,y);
+//	}
 	
-	private Point placeTreasure() {
-		int x = 0;
-		int y = 0;
-		boolean placedTreasure = false;
-		
-		while(!placedTreasure){
-			x = rand.nextInt(dimensionsx);
-			y = rand.nextInt(dimensionsy);
-		
-		if(islands[x][y]==false){
-			placedTreasure=true;
-			}
-		}
-		//sets location to true so no ships will be placed on the treasure location.
-		//Set to null later in constructor
-		islands[x][y] = true;
-		return new Point(x,y);
-	}
+//	private Point placeTreasure() {
+//		int x = 0;
+//		int y = 0;
+//		boolean placedTreasure = false;
+//		
+//		while(!placedTreasure){
+//			x = rand.nextInt(dimensionsx);
+//			y = rand.nextInt(dimensionsy);
+//		
+//		if(islands[x][y]==false){
+//			placedTreasure=true;
+//			}
+//		}
+//		//sets location to true so no ships will be placed on the treasure location.
+//		//Set to null later in constructor
+//		islands[x][y] = true;
+//		return new Point(x,y);
+//	}
 
 	/*make grid builds a 2D array and populates everything to be false
 	 * returns nothing*/
@@ -166,12 +179,10 @@ public class singletonMap {
 	public int getDimensionsY(){
 		return dimensionsy;
 	}
-	/* returns array of pirate locations*/
-	public ArrayList<Point> getPirates(){
-		return pirateLocations;
+	public void setShipLocation(Point ship) {
+		System.out.println("lol");
+		shipLocation = ship;
 	}
-
-
 	/* returns boolean if an ocean is ocean or is not ocean*/
 	public boolean isOcean(int x, int y){
 		if (!islands[x][y]){

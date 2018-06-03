@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 
 public class PirateShip implements Observer {
 
+	Point currentLocation;
 	static Point shipLocation;
 	static ArrayList<Point> locations;
 	ArrayList<Point> updated;
@@ -25,10 +26,10 @@ public class PirateShip implements Observer {
 	ImageView pirateIV;
 	
 	/* constructor takes an OceanMap as a parameter*/
-	public PirateShip(String image){
+	public PirateShip(String image, Point location){
 		
-		System.out.println(image);
-		locations = oceanMap.getPirates();
+		//System.out.println(image);
+		currentLocation = location;
 		
 		pirateImage = new Image(image,50,50,true,true);
 		pirateIV = new ImageView(pirateImage);
@@ -43,10 +44,8 @@ public class PirateShip implements Observer {
 	}
 	/* updates pirateship when ship moves*/
 	public void update(Ship ship) {
-		if(ship instanceof Ship){
-			  shipLocation = ((Ship)ship).getShipLocation();
-			  movePirateShip();
-		  }
+		  shipLocation = ship.getCurrentLocation();
+		  movePirateShip();
 	}
 	/* moves pirate ship closer to ships location */
 	public void movePirateShip(){
@@ -61,15 +60,19 @@ public class PirateShip implements Observer {
 		else{
 			setStrategy(new NormalMove());
 		}
-		moveStrategy.movePirateShip();
+		moveStrategy.movePirateShip(this);
 		
 		
 
 	}
 	 
 	/*returns list of pirate locations*/
-	public ArrayList<Point> getPirates(){
-		return locations;
+	public Point getCurrentLocation(){
+		return currentLocation;
+	}
+	
+	public void setLocation(Point location) {
+		currentLocation = location;
 	}
 
 }
