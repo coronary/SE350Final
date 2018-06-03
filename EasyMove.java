@@ -7,7 +7,7 @@ public class EasyMove implements MoveStrategy{
 	Point og;
 	Point change;
 	@Override
-	public void movePirateShip(PirateShip pirate) {
+	public void movePirateShip(PirateShip pirate, Point shipLocation) {
 			System.out.println(shipLocation + " Easy Move");
 			og = pirate.getCurrentLocation();
 			change = og;

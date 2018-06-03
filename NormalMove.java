@@ -8,9 +8,10 @@ public class NormalMove implements MoveStrategy {
 	Point og;
 	Point change;
 	@Override
-	public void movePirateShip(PirateShip pirate, int x) {
+	public void movePirateShip(PirateShip pirate, Point shipLocation) {
 			
-			System.out.println("Identifier: " + x + " " + shipLocation + " Normal Move");
+			System.out.println(shipLocation + " Normal Move");
+			
 			
 			og = pirate.getCurrentLocation();
 			change = og;

@@ -49,6 +49,7 @@ public class PirateShip implements Observer {
 	/* updates pirateship when ship moves*/
 	public void update(Ship ship) {
 		  shipLocation = ship.getCurrentLocation();
+		 // System.out.println(shipLocation + " PirateShip update method");
 		  movePirateShip();
 	}
 	/* moves pirate ship closer to ships location */
@@ -64,7 +65,7 @@ public class PirateShip implements Observer {
 		else{
 			setStrategy(new NormalMove());
 		}
-		moveStrategy.movePirateShip(this, check);
+		moveStrategy.movePirateShip(this, shipLocation);
 		
 		
 

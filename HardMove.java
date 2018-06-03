@@ -7,8 +7,8 @@ public class HardMove implements MoveStrategy {
 	Point og;
 	Point change;
 	@Override
-	public void movePirateShip(PirateShip pirate) {
-			System.out.println(shipLocation + " Hard Move");
+	public void movePirateShip(PirateShip pirate, Point shipLocation) {
+			System.out.println(shipLocation + " Easy Move");
 			og = pirate.getCurrentLocation();
 			change = og;
 	

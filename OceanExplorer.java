@@ -105,12 +105,20 @@ public class OceanExplorer extends Application {
 			 			singletonMap.destroy();
 			 			chest.destroy();
 			 			ship.clearObservers();
+			 			nuclear();
 						start(mapStage);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 			 	}
 			});
+		
+		addButtons();
+		startSailing();
+	
+	}
+	
+	private void addButtons() {
 		root.getChildren().add(button);
 		b1 = new Button("Easy");
 		b1.setOnAction(new EventHandler<ActionEvent>() {
@@ -135,10 +143,12 @@ public class OceanExplorer extends Application {
 			});
 		b3.setLayoutX(115);
 		root.getChildren().add(b3);
-		
-		
-		startSailing();
+	}
 	
+	private void nuclear() {
+		pirates.clear();
+		pirate1 = null;
+		pirate2 = null;
 	}
 	
 	private void observerStuff() {
