@@ -41,7 +41,7 @@ public class PirateShip implements Observer {
 	
 	public ImageView getPirateImageView() {
 		return pirateIV;
->>>>>>> 58c964de43a2ba96d8c8a09ed50af9e084aa2278
+
 	}
 	
 	public void setStrategy(MoveStrategy strategy){
@@ -53,10 +53,7 @@ public class PirateShip implements Observer {
 		 // System.out.println(shipLocation + " PirateShip update method");
 		  movePirateShip();
 	}
-	/*returns the ship imageview*/
-	public static ImageView getImage(){
-		return shipView;
-	}
+	
 	/* moves pirate ship closer to ships location */
 	public void movePirateShip(){
 		//have if/if-else statements to check if user selected easy/normal/hard and then set the strategy accordingly
