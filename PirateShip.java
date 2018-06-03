@@ -25,14 +25,9 @@ public class PirateShip implements Observer {
 	Image pirateImage;
 	ImageView pirateIV;
 	
-	Random rand1 = new Random();
-	
-	int check;
-	
-	/* constructor takes an OceanMap as a parameter*/
+		/* constructor takes an OceanMap as a parameter*/
 	public PirateShip(String image, Point location){
-		check = rand1.nextInt(1000000);
-		//System.out.println(image);
+		
 		currentLocation = location;
 		
 		pirateImage = new Image(image,50,50,true,true);
