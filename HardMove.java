@@ -8,9 +8,9 @@ public class HardMove implements MoveStrategy {
 	Point change;
 	@Override
 	//moves pirate ships fast. They will always move and they move two spaces at once
-	public void movePirateShip(PirateShip pirate, Point shipLocation) {
+	public Point movePirateShip(Point pirate, Point shipLocation) {
 			System.out.println(shipLocation + " Easy Move");
-			og = pirate.getCurrentLocation();
+			og = pirate;
 			change = og;
 	
 			 try{
@@ -30,7 +30,7 @@ public class HardMove implements MoveStrategy {
 			 catch(ArrayIndexOutOfBoundsException e){
 				 change = og;
 			 }
-			 pirate.setLocation(change);
+			 return change;
 
 	}
 

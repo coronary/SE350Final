@@ -5,21 +5,30 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 
 
 public class Ship implements Subject{
 	Point currentLocation;
 	singletonMap map;
+	Image shipPic;
+	static ImageView shipview;
 	
 	List<Observer> observers = new LinkedList<Observer>();
 
-	/* constructor take ocean mao as constructor*/
+	/* constructor take ocean map as constructor*/
 	public Ship() {
 		map = singletonMap.getInstance();
 		currentLocation = map.getShipLocation();
+		shipPic = new Image("ship.png",50,50,true,true);
+		shipview = new ImageView(shipPic);
 	}
-	
+	public static ImageView getImage(){
+		return shipview;
+	}
 	/* returns point of ships location*/
 	public Point getCurrentLocation(){
 		//System.out.println(currentLocation);

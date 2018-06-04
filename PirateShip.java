@@ -25,14 +25,9 @@ public class PirateShip implements Observer {
 	Image pirateImage;
 	ImageView pirateIV;
 	
-	Random rand1 = new Random();
-	
-	int check;
-	
-	/* constructor takes an OceanMap as a parameter*/
+		/* constructor takes an OceanMap as a parameter*/
 	public PirateShip(String image, Point location){
-		check = rand1.nextInt(1000000);
-		//System.out.println(image);
+		
 		currentLocation = location;
 		
 		pirateImage = new Image(image,50,50,true,true);
@@ -41,6 +36,7 @@ public class PirateShip implements Observer {
 	//returns pirate imageview
 	public ImageView getPirateImageView() {
 		return pirateIV;
+
 	}
 	//sets the move strategy of pirates
 	public void setStrategy(MoveStrategy strategy){
@@ -52,6 +48,7 @@ public class PirateShip implements Observer {
 		 // System.out.println(shipLocation + " PirateShip update method");
 		  movePirateShip();
 	}
+	
 	/* moves pirate ship closer to ships location */
 	public void movePirateShip(){
 		//have if/if-else statements to check if user selected easy/normal/hard and then set the strategy accordingly
@@ -65,7 +62,7 @@ public class PirateShip implements Observer {
 		else{
 			setStrategy(new NormalMove());
 		}
-		moveStrategy.movePirateShip(this, shipLocation);
+		 currentLocation = moveStrategy.movePirateShip(currentLocation, shipLocation);
 		
 		
 
