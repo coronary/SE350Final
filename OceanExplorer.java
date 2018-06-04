@@ -160,11 +160,11 @@ public class OceanExplorer extends Application {
 	/*loadShipImage adds the ship image to the location of the ship
 	 * it returns nothing */
     private void loadShipImage(){
-		Image shipImage = new Image("ship.png",50,50,true,true);
-		shipImageView = new ImageView(shipImage);
+		shipImageView = Ship.getImage();
 		
 		shipImageView.setX(ship.getCurrentLocation().x*scalingFactor);
 		shipImageView.setY(ship.getCurrentLocation().y*scalingFactor);		
+
 		root.getChildren().add(shipImageView);
 	
 		
