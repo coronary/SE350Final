@@ -65,7 +65,7 @@ public class PirateShip implements Observer {
 		else{
 			setStrategy(new NormalMove());
 		}
-		moveStrategy.movePirateShip(this, shipLocation);
+		 currentLocation = moveStrategy.movePirateShip(currentLocation, shipLocation);
 		
 		
 

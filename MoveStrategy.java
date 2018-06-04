@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public interface MoveStrategy {
-	public void movePirateShip(PirateShip ship, Point shipLocation);
+	public Point movePirateShip(Point pirateLocation, Point shipLocation);
 	public String getStrategy();
 	
 	singletonMap oceanMap = singletonMap.getInstance();
