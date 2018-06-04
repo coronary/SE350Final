@@ -13,7 +13,7 @@ public class TreasureChest {
 	static Point coords;
 	
 	private TreasureChest() {
-		chestPic = new Image("treasure.jpg",50,50,true,true);
+		chestPic = new Image("treasure.png",50,50,true,true);
 		chestView = new ImageView(chestPic);
 		map = singletonMap.getInstance();
 		coords = map.getTreasureLocation();
